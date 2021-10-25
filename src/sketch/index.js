@@ -1,4 +1,4 @@
-import Bubble from './bubble';
+import Bubble from "./bubble";
 
 export default function sketch(s) {
   let x, y, backgroundColor;
@@ -7,24 +7,24 @@ export default function sketch(s) {
   const width = 9 * multip;
   const height = 16 * multip;
 
-  let bub1, bub2
+  let bubbles = []
+
 
   s.setup = () => {
     s.createCanvas(width, height);
     backgroundColor = s.color(s.random(255), s.random(255), s.random(255));
-
-    bub1 = new Bubble;
-    bub2 = new Bubble;
+    s.background(backgroundColor);
+    s.noStroke()
   };
 
   s.draw = () => {
-    s.background(backgroundColor);
-    s.fill(s.color(255, 255, 0));
-    bub1.bubbin(s)
-    bub2.bubbin(s)
-  };
 
-  s.mousePressed = () => {
-    backgroundColor = s.color(s.random(255), s.random(255), s.random(255));
+    s.mouseClicked = () => {
+      bubbles.push(new Bubble(s));
+    }
+
+    for (let bubble of bubbles) {
+      bubble.run(s);
+    }
   };
 }
